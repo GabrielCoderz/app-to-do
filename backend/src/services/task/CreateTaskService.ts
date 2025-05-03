@@ -6,7 +6,7 @@ enum Priority {
     BAIXA = 'BAIXA',
 }
 
-interface TaskRequest {
+interface CreateTaskRequest {
     user_id: string;
     description: string;
     priority: Priority;
@@ -15,7 +15,7 @@ interface TaskRequest {
 
 class CreateTaskService {
 
-    async execute({ user_id, description, priority, completed }: TaskRequest) {
+    async execute({ user_id, description, priority, completed }: CreateTaskRequest) {
 
         if(!description) {
             throw new Error("A descrição da tarefa é obrigatória.");
