@@ -24,7 +24,7 @@ class AuthUserService {
         const passwordMatch = await compare(password, user?.password)
 
         if(!passwordMatch) {
-            throw new Error("Email/password incorreto");
+            throw new Error("Email/senha incorreto");
         }
 
         if (!process.env.JWT_SECRET) {

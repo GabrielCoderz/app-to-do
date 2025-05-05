@@ -46,6 +46,41 @@ const userRoutes = Router();
  *                   type: string
  */
 userRoutes.post('/', new CreateUserController().handle);
+
+/**
+ * @swagger
+ * /users/session:
+ *   post:
+ *     summary: Autentica um usuário
+ *     tags: [Usuários]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Usuário criado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                 name:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *                 token:
+ *                   type: string
+ */
 userRoutes.post('/session', new AuthUserController().handle);
 
 export { userRoutes };
