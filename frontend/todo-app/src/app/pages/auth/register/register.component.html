@@ -1,0 +1,40 @@
+<div class="register-container">
+  <mat-card>
+    <h2 mat-card-title>Novo Cadastro</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="name" placeholder="Digite seu nome" />
+        <mat-error *ngIf="registerForm.controls['name'].hasError('required')">
+          O nome é obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Digite seu e-mail" />
+        <mat-error *ngIf="registerForm.controls['email'].hasError('required')">
+          O email é obrigatório
+        </mat-error>
+        <mat-error *ngIf="registerForm.controls['email'].hasError('email')">
+          Insira um e-mail válido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Senha</mat-label>
+        <input matInput formControlName="password" type="password" placeholder="Digite sua senha" />
+        <mat-error *ngIf="registerForm.controls['password'].hasError('required')">
+          A senha é obrigatória
+        </mat-error>
+      </mat-form-field>
+
+      <div class="button-container">
+        <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">
+          Cadastrar
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

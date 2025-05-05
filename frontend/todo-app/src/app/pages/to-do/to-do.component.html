@@ -1,0 +1,51 @@
+<h1 class="title">App de Tarefas</h1>
+<button class="exit-button" mat-raised-button color="warn" (click)="logout()">
+  Sair
+</button>
+
+<div class="container">
+
+    <h3 class="welcome-text">Bem-vindo, {{ username }}.</h3>
+
+
+  <button mat-raised-button color="primary" (click)="openNewTaskDialog()">
+      Nova Tarefa
+  </button>
+</div>
+
+<h2 class="sub-title">Tarefas pendentes</h2>
+
+<div *ngIf="pendingTasks$ | async as tasks">
+  <ng-container *ngIf="tasks.length > 0; else noTasks">
+    <div *ngFor="let task of tasks" class="pending-task-card">
+      <mat-card>
+        <mat-card-title>{{ task.description }}</mat-card-title>
+        <mat-card-subtitle>Prioridade: {{ task.priority }}</mat-card-subtitle>
+        <button class="pending-task-button" mat-button color="primary" (click)="markAsCompleted(task.id)">
+          Concluir
+        </button>
+      </mat-card>
+    </div>
+  </ng-container>
+
+  <ng-template #noTasks>
+    <p class="empty-task">Nenhuma tarefa pendente encontrada.</p>
+  </ng-template>
+</div>
+
+<h2 class="sub-title">Tarefas concluídas</h2>
+
+<div *ngIf="completedTasks$ | async as tasks">
+  <ng-container *ngIf="tasks.length > 0; else noTasks">
+    <div *ngFor="let task of tasks" class="completed-task-card">
+      <mat-card>
+        <mat-card-title>{{ task.description }}</mat-card-title>
+        <mat-card-subtitle>Prioridade: {{ task.priority }}</mat-card-subtitle>
+      </mat-card>
+    </div>
+  </ng-container>
+
+  <ng-template #noTasks>
+    <p class="empty-task">Nenhuma tarefa concluída encontrada.</p>
+  </ng-template>
+</div>

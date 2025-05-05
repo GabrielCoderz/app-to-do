@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { CreateTaskController } from '../controllers/task/CreateTaskController';
 import { ListTaskController } from '../controllers/task/ListTaskController';
 import { isAuthenticated } from '../middlewares/isAuthenticated';
+import { UpdateTaskStatusController } from '../controllers/task/UpdateStatusTaskController';
 
 const taskRoutes = Router();
 
@@ -83,5 +84,37 @@ taskRoutes.post('/', isAuthenticated, new CreateTaskController().handle);
  *                   type: boolean
  */
 taskRoutes.get('/', isAuthenticated, new ListTaskController().handle);
+
+/**
+ * @swagger
+ * /tasks/:id/completed:
+ *   get:
+ *     summary: Atualiza o status da tarefa
+ *     tags: [Tarefas]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               completed:
+ *                 type: boolean
+ *     responses:
+ *       201:
+ *         description: Tarefas buscadas com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                 completed:
+ *                   type: boolean
+ */
+taskRoutes.patch('/:id/completed', isAuthenticated, new UpdateTaskStatusController().handle);
 
 export { taskRoutes };

@@ -1,0 +1,34 @@
+<!-- src/app/login/login.component.html -->
+
+<div class="login-container">
+  <mat-card>
+    <h2 mat-card-title>Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Digite seu e-mail" />
+        <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
+          O email é obrigatório
+        </mat-error>
+        <mat-error *ngIf="loginForm.controls['email'].hasError('email')">
+          Insira um e-mail válido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Senha</mat-label>
+        <input matInput formControlName="password" type="password" placeholder="Digite sua senha" />
+        <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+          A senha é obrigatória
+        </mat-error>
+      </mat-form-field>
+
+      <div class="button-container">
+        <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
+          Entrar
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>
