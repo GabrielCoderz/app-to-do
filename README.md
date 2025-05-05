@@ -29,6 +29,8 @@ npm install
 
 #### 2. Configure o banco de dados:
 
+Crie um arquivo .env na raiz com as variáveis:
+
 ```bash
 DATABASE_URL="file:./dev.db"
 
@@ -52,3 +54,34 @@ npm run dev
 #### 🧪 Acesse a API em: http://localhost:3333
 
 #### 📚 Documentação Swagger: http://localhost:3333/api/v1/docs
+
+## 🖥️ Frontend
+
+### 📍 Caminho: `/front-end/app-todo`
+
+#### 1. Instale as dependências:
+
+```bash
+cd front-end/app-todo
+npm install
+```
+
+#### 2. Inicie a aplicação Angular:
+
+```bash
+ng serve -o
+```
+
+Este comando irá automaticamente abrir o app no navegador, mas caso não aconteça:
+
+🖼️ Acesse o app em: http://localhost:4200
+
+## Desafio proposto
+
+### Pergunta: E se você precisar disponibilizar essa aplicação na AWS? Descreva brevemente como o faria.
+
+### Resposta:
+
+```bash
+Encapsularia tanto o backend quanto o frontend em containers Docker. Subiria esses containers para um repositório no Amazon ECR. Em seguida, utilizaria o Amazon ECS (com Fargate) para orquestrar os containers. Para o banco de dados, usaria o Amazon RDS com PostgreSQL. Para o frontend, poderia usar também o Amazon S3 + CloudFront, se optasse por servir a aplicação como um app estático. Toda a infraestrutura seria gerenciada com Terraform pois assim teriamos um controle maior de toda a infraestrutura.
+```
