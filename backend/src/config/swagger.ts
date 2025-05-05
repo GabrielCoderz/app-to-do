@@ -6,9 +6,18 @@ const swaggerOptions = {
   swaggerDefinition: {
     openapi: '3.1.0',
     info: {
-      title: 'Minha API',
+      title: 'API de To Do',
       version: '1.0.0',
       description: 'Documentação da API',
+    },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        }
+      }
     },
     servers: [
       {
