@@ -82,6 +82,4 @@ Este comando irá automaticamente abrir o app no navegador, mas caso não aconte
 
 ### Resposta:
 
-```bash
 Encapsularia tanto o backend quanto o frontend em containers Docker. Subiria esses containers para um repositório no Amazon ECR. Em seguida, utilizaria o Amazon ECS (com Fargate) para orquestrar os containers. Para o banco de dados, usaria o Amazon RDS com PostgreSQL. Para o frontend, poderia usar também o Amazon S3 + CloudFront, se optasse por servir a aplicação como um app estático. Toda a infraestrutura seria gerenciada com Terraform pois assim teriamos um controle maior de toda a infraestrutura.
-```
