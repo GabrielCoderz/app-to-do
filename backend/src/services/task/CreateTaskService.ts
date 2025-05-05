@@ -1,6 +1,6 @@
 import prisma from '../../prisma';
 
-enum Priority {
+export enum Priority {
     ALTA = 'ALTA',
     MEDIA = 'MEDIA',
     BAIXA = 'BAIXA',
@@ -21,9 +21,9 @@ class CreateTaskService {
             throw new Error("A descrição da tarefa é obrigatória.");
         }
 
-        if(!completed) {
+        if (completed === undefined) {
             throw new Error("O status da tarefa é obrigatório.");
-        }
+          }
 
         if (!Object.values(Priority).includes(priority)) {
             throw new Error('Prioridade inválida. Use Alta, Média ou Baixa.');

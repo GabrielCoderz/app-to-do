@@ -4,7 +4,7 @@ import { taskRoutes } from './task.routes';
 
 const router = Router();
 
-router.use('/users', userRoutes);
-router.use('/tasks', taskRoutes);
+router.use('/api/v1/users', userRoutes);
+router.use('/api/v1/tasks', taskRoutes);
 
 export { router };
