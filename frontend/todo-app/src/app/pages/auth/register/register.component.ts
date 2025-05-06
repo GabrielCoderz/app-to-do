@@ -1,12 +1,12 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -21,27 +21,37 @@ import { ToastrService } from 'ngx-toastr';
     MatCardModule,
     MatIconModule,
     ReactiveFormsModule,
+    RouterModule
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
   registerForm: FormGroup;
+  private isBrowser!: boolean;
 
-  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService,
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {
     this.registerForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
     });
+
+    this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit() {
-    const token = localStorage.getItem('token');
-    console.log(token)
+    if(this.isBrowser) {
+      const token = localStorage.getItem('token');
 
-    if(token) {
-      this.router.navigate(['/to-do']);
+      if(token) {
+        this.router.navigate(['/to-do']);
+      }
     }
   }
 

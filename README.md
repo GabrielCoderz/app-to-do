@@ -29,7 +29,7 @@ npm install
 
 #### 2. Configure o banco de dados:
 
-Crie um arquivo .env na raiz com as variáveis:
+Crie um arquivo .env na raiz da pasta backend com as variáveis:
 
 ```bash
 DATABASE_URL="file:./dev.db"

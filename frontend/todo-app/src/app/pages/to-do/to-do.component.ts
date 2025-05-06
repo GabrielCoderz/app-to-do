@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
@@ -16,22 +16,35 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './to-do.component.html',
   styleUrl: './to-do.component.css'
 })
-export class ToDoComponent implements OnInit {
+export class ToDoComponent {
   public username: string = '';
   tasks$!: Observable<Task[]>;
   pendingTasks$!: Observable<Task[]>
   completedTasks$!: Observable<Task[]>
+  private isBrowser!: boolean;
 
   dialog = inject(MatDialog);
 
-  constructor(private todoService: ToDoService, private toastr: ToastrService) {}
+  constructor(
+    private todoService: ToDoService,
+    private toastr: ToastrService,
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnInit() {
-    this.username = localStorage.getItem('username') || '';
-    this.pendingTasks$ = this.todoService.pendingTasks$;
-    this.completedTasks$ = this.todoService.completedTasks$;
+    if(this.isBrowser) {
+      this.username = localStorage.getItem('username') || '';
+      this.pendingTasks$ = this.todoService.pendingTasks$;
+      this.completedTasks$ = this.todoService.completedTasks$;
 
-    this.todoService.list();
+      this.todoService.list();
+    }
+  }
+
+  ngAfterViewInit() {
+
   }
 
   openNewTaskDialog() {
@@ -69,9 +82,11 @@ export class ToDoComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('token')
-    localStorage.removeItem('name')
+    if(this.isBrowser) {
+      localStorage.removeItem('token')
+      localStorage.removeItem('name')
 
-    window.location.reload()
+      window.location.reload()
+    }
   }
 }

@@ -19,18 +19,6 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/users`, { name, email, password });
   }
 
-  saveToken(token: string) {
-    localStorage.setItem('token', token);
-  }
-
-  getToken(): string | null {
-    return localStorage.getItem('token');
-  }
-
-  isAuthenticated(): boolean {
-    return !!this.getToken();
-  }
-
   logout() {
     localStorage.removeItem('token');
   }
