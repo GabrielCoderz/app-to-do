@@ -13,7 +13,6 @@ Um aplicativo fullstack de tarefas simples, com autenticação de usuário, cria
 
 - Node.js 18+
 - Angular CLI 17+
-- SQLite rodando localmente
 - NPM instalado
 
 ## 🖥️ Backend
