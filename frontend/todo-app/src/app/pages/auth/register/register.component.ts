@@ -60,7 +60,7 @@ export class RegisterComponent {
       const { name, email, password } = this.registerForm.value;
       this.authService.register(name, email, password).subscribe({
         next: (item) => {
-          console.log(item);
+          this.toastr.success('Usuário criado. Por favor, faça o login.', 'Sucesso');
           this.router.navigate(['/login']);
         },
         error: (err) => {
